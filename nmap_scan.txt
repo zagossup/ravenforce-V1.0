@@ -1,0 +1,4 @@
+# Nmap 7.95 scan initiated Sun Mar  2 10:28:20 2025 as: /usr/lib/nmap/nmap -sV -Pn -oN nmap_scan.txt jaysnnbrgov@gmail.com
+Failed to resolve "jaysnnbrgov@gmail.com".
+WARNING: No targets were specified, so 0 hosts scanned.
+# Nmap done at Sun Mar  2 10:28:22 2025 -- 0 IP addresses (0 hosts up) scanned in 2.42 seconds
